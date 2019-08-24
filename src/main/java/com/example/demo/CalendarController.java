@@ -89,12 +89,14 @@ public class CalendarController {
   }
 
   @GetMapping("/get-employee-meetings-by-id")
-  public String getEmployeeMeetings(@RequestParam("id") String id) {
+  public ArrayList<String> getEmployeeMeetings(@RequestParam("id") String id) {
     //Iterator it = meetings.entrySet().iterator();
     //while (it.hasNext()) {
     //  Meeting m = it.next();
     //  it.remove();
     //}
+
+    ArrayList<String> al = new ArrayList<>();
 
     String out = "Meetings for " + id + " are: ";
 
@@ -103,13 +105,14 @@ public class CalendarController {
       if(Arrays.asList(s).contains(id)){
         LOGGER.info(entry.getKey());
         out += entry.getKey() + " ";
+        al.add(entry.getKey());
       }
       LOGGER.info(entry.getValue().employees);
     }
 
     //String s = meetings.get(id).employees;
 
-    return out;
+    return al;
   }
 
 }
